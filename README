@@ -1,0 +1,2 @@
+A pure Scala implementation of RFM spectral clustering, and a Spark + Skylark implementation
+The former uses MLLib's ARPACK binding to compute the singular vectors. Hopefully Skylark does something more efficient
