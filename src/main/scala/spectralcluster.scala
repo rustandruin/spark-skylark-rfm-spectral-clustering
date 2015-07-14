@@ -6,6 +6,10 @@
 
 package org.apache.spark.mllib.linalg.distributed
 
+import org.apache.log4j.LogManager
+import org.apache.log4j.Level
+import org.apache.log4j.PropertyConfigurator
+
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
@@ -95,13 +99,18 @@ object SpectralClusterExample {
     val k = args(3).toInt
     val numRandFeats = args(4).toInt
     val maxIters = 30
-    val numparts = 5
+    val numparts = 20
 
     val rng = new java.util.Random
     val randSeed = rng.nextLong
 
+    val log = LogManager.getRootLogger()
+    log.setLevel(Level.INFO)
+
     // load the data as an IndexedRowMatrix
+    log.info("Loading data")
     var mat = loadMSIData(sc, "csv", (numrows, numcols), inpath, nparts = numparts)
+    log.info("Finished loading data")
     mat.rows.cache()
 
     // evaluate the random feature mappings 

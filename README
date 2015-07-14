@@ -1,2 +1,15 @@
-A pure Scala implementation of RFM spectral clustering, and a Spark + Skylark implementation
-The former uses MLLib's ARPACK binding to compute the singular vectors. Hopefully Skylark does something more efficient
+A pure Scala implementation of RFM spectral clustering, and a Spark + Skylark implementation. The former uses MLLib's ARPACK binding to compute the singular vectors, so does a single map-reduce for each iteration where it implicitly evaluates a matrix-vector product with a Grammian. Hopefully Skylark does something more efficient, and the difference is noticeable.
+
+Notes:
+-----
+1. ensure hadoop, yarn, spark, and skylark are installed (this should be fine if you use the spark-skylark StarCluster AMI or plugin)
+2. start yarn, dfs, spark 
+2. install sbt with 
+	echo "deb http://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+	sudo apt-get update
+	sudo apt-get install sbt
+then run
+	sbt runTest
+
+modify the runTest target as needed in build.sbt to experiment with other datasets. see the scala code to understand the inputs and outputs
+

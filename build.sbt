@@ -14,5 +14,5 @@ libraryDependencies += "org.apache.spark" %% "spark-mllib" % "1.3.1" % "provided
 
 lazy val runTest = taskKey[Unit]("Submit test of spectral clustering")
 runTest <<= (assembly in Compile) map {
-  (jarFile: File) => s"/opt/Spark/bin/spark-submit --verbose --master yarn-cluster --driver-memory 1G --class org.apache.spark.mllib.linalg.distributed.SpectralClusterExample ${jarFile} file://./data/test.csv 55 200 3 100 2>&1 | tee data/run.log" !
+  (jarFile: File) => s"sh rundataset.sh ${jarFile}" !
 }
